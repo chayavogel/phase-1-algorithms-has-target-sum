@@ -36,34 +36,54 @@ if (require.main === module) {
   console.log("Expecting: false");
   console.log("=>", hasTargetSum([1], 3));
 }
-
-// Pseudocode:
-// Add each element of the array to every single other element and see if the equal to the target value.
-
-// Code:
-function hasTargetSum(array, target) {
-  // Iterate through the array, and assign the index to i.
-  let firstNumIndex= 0
-  while (firstNumIndex < array.length) {
-    // Then iterate through the array again from the index of the current value of i +1) and assign the index to j.
-    for (let secondNumIndex= 1; (secondNumIndex >= (firstNumIndex + 1)) && (secondNumIndex < array.length); secondNumIndex++) {
-      // Within that nested loop, check if the sum of the value at i and the value at j equal to the target number. If yes, return true. If false, add 1 to the value of i.
-      if ((array[firstNumIndex] + array[secondNumIndex] === target) === true) {
-        return true
-      }
-    }
-  }
-  // Repeat.
-  firstNumIndex++
-}
-
-// Make It Clean and Readable:
-
-// Optimize:
-
-// Add written explanation of your solution here:
-
-// Write the Big O time complexity of your function here
-
-
 module.exports = hasTargetSum;
+
+// 3) Pseudocode:
+// The input is an array of numbers and a target number.
+// For each element of the array except the last, add it to every single other element and see if the sum equals to the target value.
+
+// 4) Code and Algorithm:
+// function hasTargetSum(array, target) {
+
+// // Iterate through the array for every element except the last.
+//   for (let i= 0; i< array.length-1; i++) {
+//     // In that iteration, iterate through every element of the array that comes after the element in the previous iteration.
+//     for (let j= i+ 1;  j< array.length; j++) {
+//       // If the element in first iteration and the element in the second iteration added up to equal the target returns true, end the loop and return true. Otherwise keep looping.
+//       if (array[i] + array[j] === target) {
+//         return true;
+//       }
+//     }
+//     // And then continue iterating through the outer iteration.
+//   }
+//   // If nothing adds up, return false.
+//   return false
+// }
+
+// 5) Make It Clean and Readable:
+
+function hasTargetSum(array, target) {
+
+  // Iterate through the array for every element except the last.
+    for (let i= 0; i< array.length-1; i++) {
+      // Iterate through every element of the array that comes after the element in the previous iteration.
+      for (let j= i+ 1;  j< array.length; j++) {
+        // If the element in first iteration and the element in the second iteration added up to equal the target returns true, end the loop and return true. Otherwise keep looping.
+        if (array[i] + array[j] === target) {
+          return true;
+        }
+      }
+      // If none return true from the first loop, continue iterating through the outer iteration.
+    }
+    // If nothing adds up, return false.
+    return false
+  }
+
+// 6) Optimize:
+// Don't know how.
+
+// 7) Add written explanation of your solution here:
+// Each element of the array is added to every element after that, respectively. If any of these sums are equal to the target, the function returns true. Otherwise, it returns false.
+
+// 8) Write the Big O time complexity of your function here:
+// O(n^2)
